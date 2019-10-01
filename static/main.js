@@ -23,14 +23,13 @@
 // POSSIBILITY OF SUCH DAMAGE
 "use strict";
 
-__webpack_public_path__ = window.httpRootDir + 'dist/';
-window.__webpack_public_path__ = __webpack_public_path__;
+// setup analytics before anything else so we can capture any future errors in sentry
+var analytics = require('./analytics');
 
 require('popper.js');
 require('bootstrap');
 require('bootstrap-slider');
 
-var analytics = require('./analytics');
 var sharing = require('./sharing');
 var _ = require('underscore');
 var $ = require('jquery');

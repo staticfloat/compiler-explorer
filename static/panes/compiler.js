@@ -1478,9 +1478,6 @@ function getAsmInfo(opcode) {
         return Promise.resolve(cached.found ? cached.result : null);
     }
     var base = window.httpRoot;
-    if (!base.endsWith('/')) {
-        base += '/';
-    }
     return new Promise(function (resolve, reject) {
         $.ajax({
             type: 'GET',
