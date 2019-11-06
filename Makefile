@@ -58,8 +58,9 @@ clean:  ## Cleans up everything
 
 # Don't use $(NODE) ./node_modules/<path to node_module> as sometimes that's not actually a node script. Instead, rely
 # on PATH ensuring "node" is found in our distribution first.
-run: export NODE_ENV=production WEBPACK_ARGS="-p"
-run: prereqs webpack  ## Runs the site normally
+run: export NODE_ENV=production
+run: export WEBPACK_ARGS="-p"
+run: prereqs webpack ## Runs the site normally
 	./node_modules/.bin/supervisor -w app.js,lib,etc/config -e 'js|node|properties' --exec $(NODE) $(NODE_ARGS) -- ./app.js $(EXTRA_ARGS)
 
 dev: export NODE_ENV=development
@@ -72,6 +73,7 @@ debug: prereqs install-git-hooks ## Runs the site as a developer with full debug
 
 HASH := $(shell git rev-parse HEAD)
 dist: export WEBPACK_ARGS=-p
+dist: export NODE_ENV=production
 dist: prereqs webpack  ## Creates a distribution
 	echo ${HASH} > dist/git_hash
 
